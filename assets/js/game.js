@@ -1,3 +1,9 @@
+// Game States
+// "WIN" - Player robot has defeated all enemy-robots
+//    * Fight all enemy-robots
+//    * Defeat each enemy-robot
+// "LOSE" - Player robot's health is zero or less
+
 // creates a fight function
 let playerName = window.prompt("What is your name ninja?")
 let playerHealth = 100 
@@ -6,11 +12,11 @@ let playerMoney = 10
 
 console.log(playerName, playerHealth, playerAttack)
 
-const enemyName = "Death Bringer"
+const enemyNames = ["Death Bringer", "Snake Charmer", "Shadow"]
 let enemyHealth = 50
 const enemyAttack = 12
 
-const fight = function() {
+const fight = function(enemyName) { 
   window.alert("Welcome to ninja showdown!")
 
   const promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
@@ -51,4 +57,6 @@ const fight = function() {
   }
 }
 
-fight()
+for (i = 0; i < enemyNames.length; i++) {
+  fight(enemyNames[i])
+}
