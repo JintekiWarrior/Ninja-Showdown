@@ -33,7 +33,7 @@ const fight = function(enemyName) {
         fight()
       }
     } 
-    
+
     //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
     enemyHealth -= playerAttack
 
@@ -63,7 +63,13 @@ const fight = function(enemyName) {
 }
 
 for (i = 0; i < enemyNames.length; i++) {
-  let pickedEnemyName = enemyNames[i]
-  enemyHealth = 50
-  fight(pickedEnemyName)
+  if (playerHealth > 0) {
+    window.alert("Welcome to ninja showdown! Round " + (i + 1))
+    let pickedEnemyName = enemyNames[i]
+    enemyHealth = 50
+    fight(pickedEnemyName)
+  } else {
+    window.alert("You have died. Game Over!")
+    break
+  }
 }
