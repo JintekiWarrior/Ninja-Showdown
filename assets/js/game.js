@@ -6,7 +6,7 @@
 
 // creates a fight function
 let playerName = window.prompt("What is your name ninja?")
-let playerHealth = 100 
+let playerHealth = 10
 const playerAttack = 10
 let playerMoney = 10
 
@@ -38,9 +38,12 @@ const fight = function(enemyName) {
       // Log a resulting message to the console so we know that it worked.
       console.log(`${enemyName} attacked ${playerName}. ${playerName} hp ${playerHealth}`)
   
-      playerHealth <= 0 ? 
-        window.alert(`${playerName} has died`) : 
+      if (playerHealth <= 0) {
+        window.alert(`${playerName} has died`)
+        break
+      } else {
         window.alert(`${playerName} still has ${playerHealth} health left`)
+      }  
   
     } else if (promptFight.toLowerCase() === "skip") {
       const confirmSkip = window.confirm("Are you sure you'd like to skip?")
