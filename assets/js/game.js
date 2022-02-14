@@ -1,8 +1,10 @@
-// Game States
-// "WIN" - Player robot has defeated all enemy-robots
-//    * Fight all enemy-robots
-//    * Defeat each enemy-robot
-// "LOSE" - Player robot's health is zero or less
+// pseudo-code 
+// Display players score and ask if they wish to play again
+// if player is dead or game is over
+  // reset player health back to initial 
+  // play the fight function once more
+
+
 
 // creates a fight function
 let playerName = window.prompt("What is your name ninja?")
@@ -62,14 +64,37 @@ const fight = function(enemyName) {
   }
 }
 
-for (i = 0; i < enemyNames.length; i++) {
+const endGame = function() {
   if (playerHealth > 0) {
-    window.alert("Welcome to ninja showdown! Round " + (i + 1))
-    let pickedEnemyName = enemyNames[i]
-    enemyHealth = 50
-    fight(pickedEnemyName)
+    window.alert("Great job surviving. Your score is " + playerMoney)
   } else {
-    window.alert("You have died. Game Over!")
-    break
+    window.alert("Sorry you died.")
+  }
+
+  const playAgainConfirm = window.confirm("Would you like to play again?")
+
+  if (playAgainConfirm) {
+    startGame()
+  } else {
+    window.alert("See ya! Come again soon")
   }
 }
+
+const startGame = function() {
+  for (i = 0; i < enemyNames.length; i++) {
+    if (playerHealth > 0) {
+      window.alert("Welcome to ninja showdown! Round " + (i + 1))
+      let pickedEnemyName = enemyNames[i]
+      enemyHealth = 50
+      fight(pickedEnemyName)
+    } else {
+      window.alert("You have died. Game Over!")
+      break
+    }
+  }
+
+  endGame()
+}
+
+startGame()
+
