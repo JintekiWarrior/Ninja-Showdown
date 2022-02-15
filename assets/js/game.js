@@ -9,7 +9,7 @@
 // creates a fight function
 let playerName = window.prompt("What is your name ninja?")
 let playerHealth = 100
-const playerAttack = 10
+let playerAttack = 10
 let playerMoney = 10
 
 console.log(playerName, playerHealth, playerAttack)
@@ -74,9 +74,49 @@ const endGame = function() {
   const playAgainConfirm = window.confirm("Would you like to play again?")
 
   if (playAgainConfirm) {
+    playerHealth = 100
+    enemyHealth = 50
     startGame()
   } else {
     window.alert("See ya! Come again soon")
+  }
+}
+
+const shop = function() {
+  var shopOptionPrompt = window.prompt(
+    "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.")
+  
+  switch (shopOptionPrompt.toLowerCase()) {
+    case "refill":
+      if (playerMoney >= 7) {
+        window.alert("Refilling players health by 20 for 7 dollars")
+
+        // Increase health and decrease money 
+        playerHealth += 20 
+        playerMoney -= 7
+      } else {
+        window.alert("money seems too tight")
+      }
+      break
+    case "upgrade":
+      if (playerMoney >= 7) {
+        window.alert("Refilling players health by 20 for 7 dollars")
+
+        // Increase health and decrease money 
+        playerAttack += 6
+        playerMoney -= 7
+      } else {
+        window.alert("money seems too tight")
+      }
+      break
+    case "leave":
+      window.alert("Leaving the store")
+      break
+    default:
+      window.alert("You didn't pick a valid option. Try again")
+
+      shop()
+      break
   }
 }
 
@@ -87,6 +127,13 @@ const startGame = function() {
       let pickedEnemyName = enemyNames[i]
       enemyHealth = 50
       fight(pickedEnemyName)
+      if (playerHealth > 0 && i < enemyNames.length - 1) {
+        const storeConfirm = window.confirm("The fight is over. Visit the store?")
+
+        if (storeConfirm) {
+          shop()
+        }
+      }
     } else {
       window.alert("You have died. Game Over!")
       break
