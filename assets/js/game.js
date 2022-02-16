@@ -1,10 +1,8 @@
-// pseudo-code 
-// Display players score and ask if they wish to play again
-// if player is dead or game is over
-  // reset player health back to initial 
-  // play the fight function once more
-
-
+// Random number function 
+const randomNumber = function(min, max) {
+  let value = Math.floor(Math.random() * (max - min + 1) + min)
+  return value 
+}
 
 // creates a fight function
 let playerName = window.prompt("What is your name ninja?")
@@ -15,12 +13,13 @@ let playerMoney = 10
 console.log(playerName, playerHealth, playerAttack)
 
 const enemyNames = ["Death Bringer", "Snake Charmer", "Shadow"]
-let enemyHealth = 50
+let enemyHealth = randomNumber(40, 60)
 const enemyAttack = 12
 
 const fight = function(enemyName) { 
   
   while (playerHealth > 0 && enemyHealth > 0) {
+    console.log(`${enemyName} has ${enemyHealth} hp`)
     const promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
     if (promptFight.toLowerCase() === "skip") {
@@ -28,7 +27,7 @@ const fight = function(enemyName) {
   
       if (confirmSkip) {
         window.alert(`${playerName} has ran away.`)
-        playerMoney -= 10
+        playerMoney = Math.max(0, playerMoney - 10)
         console.log("player money: ", playerMoney)
         break
       } else {
@@ -37,10 +36,12 @@ const fight = function(enemyName) {
     } 
 
     //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
-    enemyHealth -= playerAttack
+    let damageEnemy = randomNumber(playerAttack - 3, playerAttack)
+    enemyHealth = Math.max(0, enemyHealth - damageEnemy)
 
     // Log a resulting message to the console so we know that it worked.
-    console.log(`${playerName} attacked ${enemyName}. ${enemyName} hp ${enemyHealth}`)
+    console.log(`${playerName} attacked ${enemyName} with ${damageEnemy} damage. 
+    ${enemyName} hp ${enemyHealth}`)
 
     if (enemyHealth <= 0) {
       window.alert(`${enemyName} has died`)
@@ -50,10 +51,12 @@ const fight = function(enemyName) {
     }
 
     // Subtract the value of `enemyAttack` from the value of `playerHealth` and use that result to update the value in the `playerHealth` variable.
-    playerHealth -= enemyAttack
+    let damagePlayer = randomNumber(enemyAttack - 3, enemyAttack)
+    playerHealth = Math.max(0, playerHealth - damagePlayer)
 
     // Log a resulting message to the console so we know that it worked.
-    console.log(`${enemyName} attacked ${playerName}. ${playerName} hp ${playerHealth}`)
+    console.log(`${enemyName} attacked ${playerName} with ${damagePlayer} damage. 
+    ${playerName} hp ${playerHealth}`)
 
     if (playerHealth <= 0) {
       window.alert(`${playerName} has died`)
@@ -125,7 +128,7 @@ const startGame = function() {
     if (playerHealth > 0) {
       window.alert("Welcome to ninja showdown! Round " + (i + 1))
       let pickedEnemyName = enemyNames[i]
-      enemyHealth = 50
+      enemyHealth = randomNumber(40, 60)
       fight(pickedEnemyName)
       if (playerHealth > 0 && i < enemyNames.length - 1) {
         const storeConfirm = window.confirm("The fight is over. Visit the store?")
